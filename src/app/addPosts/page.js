@@ -14,35 +14,35 @@ const AddPost = () => {
   const create = async (formData) => {
     "use server";
 
-    const file = formData.get("image");
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
+    // const file = formData.get("image");
+    // const arrayBuffer = await file.arrayBuffer();
+    // const buffer = new Uint8Array(arrayBuffer);
 
-    const imageRes = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { tags: ["nextjs-server-actions-upload-sneakers"] },
-          function (error, result) {
-            if (error) {
-              reject(error);
-              return;
-            }
-            resolve(result);
-          }
-        )
-        .end(buffer);
-    });
+    // const imageRes = await new Promise((resolve, reject) => {
+    //   cloudinary.uploader
+    //     .upload_stream(
+    //       { tags: ["nextjs-server-actions-upload-sneakers"] },
+    //       function (error, result) {
+    //         if (error) {
+    //           reject(error);
+    //           return;
+    //         }
+    //         resolve(result);
+    //       }
+    //     )
+    //     .end(buffer);
+    // });
 
-    const name = formData.get("name");
-    const description = formData.get("description");
-    const client = await clientPromise;
-    const db = client.db();
-    await db
-      .collection("posts")
-      .insertOne({ name, description, imageSrc: imageRes.url });
+    // const name = formData.get("name");
+    // const description = formData.get("description");
+    // const client = await clientPromise;
+    // const db = client.db();
+    // await db
+    //   .collection("posts")
+    //   .insertOne({ name, description, imageSrc: imageRes.url });
 
-    revalidatePath("/posts");
-    redirect("/notes");
+    // revalidatePath("/posts");
+    // redirect("/notes");
   };
 
   return (
